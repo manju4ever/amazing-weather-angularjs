@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="WeatherApp">
+<head>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <title>Amazing Weather</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row" ng-controller="MainCtrl as vm">
+      <div class="col-md-12">
+          <h3>Amazing Weather - Made by @manju4ever with <span class="glyphicon glyphicon-heart text-danger"></span> in India.</h3>
+        <h4 class="text-success">Using {{vm.ngVersion}}</h4>
+      </div>
+      
+      <div class="col-md-12">
+            
+        <form action="" class="form-horizontal" novalidate>
+          <div class="form-group">
+            <div class="col-md-10 col-xs-8 col-sm-8">
+                 <input type="text"
+                   name="city"
+                   class="form-control"
+                   ng-model="vm.searchCity"
+                   placeholder="Search Weather By City Name"
+                   ng-required=true
+                   ng-model-options="{debounce:800}"
+                   ng-change="getWeather();getPhotos()"
+                   >
+             
+             
+            </div>
+             
+             <div class="col-md-2">
+                 <button class="btn btn-md btn-warning" ng-click="$event.preventDefault()"><i class="glyphicon glyphicon-search"></i></button>           
+
+             </div>
+           
+             
+          </div><!--form-group-->
+          
+        </form>
+         </div><!--col-md-12-->
+           
+      <div class="col-md-12">
+        <h3 class="text-primary" ng-show="vm.searchCity">You are currently searching weather for <span class="text-danger">{{vm.searchCity}}</span></h3>
+        
+        <div class="" ng-show="vm.weatherData && vm.searchCity">
+            <h3 class="text-primary">{{vm.weatherData.weather[0].description | lowercase}} at {{vm.weatherData.main.temp}}&ordm;C.</h3>
+        </div>
+        
+        
+      </div>
+         
+      <div class="col-md-12 col-sm-12 col-xs-12" ng-show="vm.searchCity">
+         
+             <h3 class="text-success">Some pictures from {{vm.searchCity}}</h3>
+              <div class="col-md-4 col-sm-2 col-xs-12" ng-repeat="image in vm.image_list">
+                  <img ng-src="{{image.url}}" alt="" height="300" width="300">              
+              </div>
+                    
+      </div>  
+          
+       
+      
+     
+    </div><!--row-->
+  </div><!--container-->
+    
+  
+  
+  
+
+</body>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
+<script src="app.js"></script>
+</html>
