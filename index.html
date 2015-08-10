@@ -56,8 +56,11 @@
       <div class="col-md-12 col-sm-12 col-xs-12" ng-show="vm.searchCity">
          
              <h3 class="text-success">Some pictures from {{vm.searchCity}}</h3>
-              <div class="col-md-4 col-sm-2 col-xs-12" ng-repeat="image in vm.image_list">
-                  <img ng-src="{{image.url}}" alt="" height="300" width="300">              
+              <div class="col-sm-6" ng-repeat="image in vm.image_list">
+                  <div class="list-group-item">
+                      <h5 class="text-warning">{{image.title}}</h5>
+                      <img class="img-responsive" ng-src="{{image.url}}">              
+                  </div>
               </div>
                     
       </div>  

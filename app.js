@@ -1,5 +1,5 @@
 
-(function() {
+(function(angular) {
   
   angular.module('WeatherApp',[])
   
@@ -14,9 +14,11 @@
     var vm = this;
     vm.ngVersion = angular.version.codeName;
     $scope.getWeather = function() {
+        
       $http({
         method:'GET',
-        url:'http://api.openweathermap.org/data/2.5/weather?q='+vm.searchCity+"&units=metric"
+        url:'http://api.openweathermap.org/data/2.5/weather?q='+vm.searchCity+"&units=metric",
+        
       })
       .success(function(response) {
         
@@ -33,9 +35,11 @@
         url:"https://api.flickr.com/services/rest/?",
         params:{
             method:'flickr.photos.search',
-            tags:vm.searchCity,
+            tags:vm.searchCity+',photography',
+            tag_mode:'all',
             accuracy:16,
-            safety_level:2,
+            safety_level:1,
+            privacy_filter:1,
             api_key:'048a032f0808b480a4b219a53cfb88d3',
             per_page:48,
             format:'json',
@@ -63,15 +67,17 @@
         
         var image_sources = [];
         
-       // console.log(JSON.stringify(photo_list));
+        //console.log(JSON.stringify(photo_list));
         
         angular.forEach(photo_list, function(value, key) {
            image_sources.push(
                {
                    id:key,
+                   title:value.title,
                    url:"https://farm"+value.farm
                    +".staticflickr.com/"+value.server
-                   +"/"+value.id+"_"+value.secret+"_m.jpg"
+                   +"/"+value.id+"_"+value.secret+"_h.jpg",
+                   
                }
             );                        
         });
@@ -84,4 +90,4 @@
     
   }//End of MainCtrl
   
-})();
+})(angular);
